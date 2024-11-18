@@ -29,12 +29,15 @@ window.onload = function init(){
     // Associate out shader variables with our data buffer
     var vPosition = gl.getAttribLocation( program, "vPosition" );
     gl.vertexAttribPointer( vPosition, 2, gl.FLOAT, false, 0, 0 );
-    gl.enableVertexAttribArray( vPosition );    
-    render();
+    gl.enableVertexAttribArray( vPosition );
+    var fcolor = gl.getUniformLocation(program, "fcolor");
+    render(fcolor);
 };
 
-function render() {
-   gl.clear( gl.COLOR_BUFFER_BIT ); 
+function render(fcolor) {
+   gl.clear( gl.COLOR_BUFFER_BIT );
+   gl.uniform4f(fcolor, 0.0, 1.0, 0.0, 1.0) 
    gl.drawArrays( gl.TRIANGLES, 0, 3);
+   gl.uniform4f(fcolor, 0.0, 0.0, 1.0, 1.0); 
    gl.drawArrays( gl.TRIANGLES, 3, 6);
 }
