@@ -7,12 +7,12 @@ window.onload = function init(){
      if ( !gl ) { alert( "WebGL isn't available"); }       
     // Three Vertices
     var vertices = [
-        vec2(-1, -1),
-        vec2(-0.5, 1),
-        vec2(0, -1),
-        vec2( 0, -1),
-        vec2(0.5, 1),
-        vec2( 1, -1) 
+        vec3(-1, -1, 0),
+        vec3(-0.5, 1, 0),
+        vec3(0, -1, 0),
+        vec3( 0, -1, 0),
+        vec3(0.5, 1, 0),
+        vec3( 1, -1, 0) 
     ];    
 
     //  Configure WebGL   
@@ -28,7 +28,7 @@ window.onload = function init(){
     gl.bufferData( gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW); 
     // Associate out shader variables with our data buffer
     var vPosition = gl.getAttribLocation( program, "vPosition" );
-    gl.vertexAttribPointer( vPosition, 2, gl.FLOAT, false, 0, 0 );
+    gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( vPosition );
     var fcolor = gl.getUniformLocation(program, "fcolor");
     render(fcolor);
@@ -39,5 +39,5 @@ function render(fcolor) {
    gl.uniform4f(fcolor, 0.0, 1.0, 0.0, 1.0) 
    gl.drawArrays( gl.TRIANGLES, 0, 3);
    gl.uniform4f(fcolor, 0.0, 0.0, 1.0, 1.0); 
-   gl.drawArrays( gl.TRIANGLES, 3, 6);
+   gl.drawArrays( gl.TRIANGLES, 3, 3);
 }
