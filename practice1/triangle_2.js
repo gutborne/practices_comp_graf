@@ -36,7 +36,7 @@ window.onload = function init(){
 
 function render(fcolor) {
    gl.clear( gl.COLOR_BUFFER_BIT );
-   gl.uniform4f(fcolor, 0.0, 1.0, 0.0, 1.0) 
+   gl.uniform4f(fcolor, 0.0, 1.0, 0.0, 1.0); 
    gl.drawArrays( gl.TRIANGLES, 0, 3);
    gl.uniform4f(fcolor, 0.0, 0.0, 1.0, 1.0); 
    gl.drawArrays( gl.TRIANGLES, 3, 3);
