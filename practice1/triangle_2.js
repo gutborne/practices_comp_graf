@@ -8,12 +8,14 @@ window.onload = function init(){
     // Three Vertices
     var vertices = [
         vec3(-1, -1, 0),
-        vec3(-0.5, 1, 0),
-        vec3(0, -1, 0),
-        vec3( 0, -1, 0),
-        vec3(0.5, 1, 0),
-        vec3( 1, -1, 0) 
-    ];    
+        vec3(0, 1, 0),
+        vec3(1, -1, 0)
+    ];
+    var colors = [
+        vec3(1, 0, 0),
+        vec3(0, 1, 0),
+        vec3(0, 0, 1)
+    ]    
 
     //  Configure WebGL   
     gl.viewport( 0, 0, canvas.width, canvas.height );
@@ -28,16 +30,21 @@ window.onload = function init(){
     gl.bufferData( gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW); 
     // Associate out shader variables with our data buffer
     var vPosition = gl.getAttribLocation( program, "vPosition" );
-    gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
+    gl.vertexAttribPointer(vPosition, 3, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( vPosition );
-    var fcolor = gl.getUniformLocation(program, "fcolor");
-    render(fcolor);
+    
+    //repeat the same process for the colors of the vertexes
+    var cBufferId = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, cBufferId);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(colors), gl.STATIC_DRAW); 
+    
+    var vColor = gl.getAttribLocation(program, "vColor");
+    gl.vertexAttribPointer(vColor, 3, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(vColor);
+    render();
 };
 
-function render(fcolor) {
-   gl.clear( gl.COLOR_BUFFER_BIT );
-   gl.uniform4f(fcolor, 0.0, 1.0, 0.0, 1.0); 
-   gl.drawArrays( gl.TRIANGLES, 0, 3);
-   gl.uniform4f(fcolor, 0.0, 0.0, 1.0, 1.0); 
-   gl.drawArrays( gl.TRIANGLES, 3, 3);
+function render() {
+   gl.clear( gl.COLOR_BUFFER_BIT);
+   gl.drawArrays( gl.TRIANGLES, 0, 3);   
 }
