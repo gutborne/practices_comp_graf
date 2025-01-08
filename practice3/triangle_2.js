@@ -1,7 +1,6 @@
 var gl;
 var points;
-var theta = 0;
-var thetaLoc;
+
 
 window.onload = function init(){
     var canvas = document.getElementById("gl-canvas");
@@ -43,14 +42,11 @@ window.onload = function init(){
     var vColor = gl.getAttribLocation(program, "vColor");
     gl.vertexAttribPointer(vColor, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(vColor);
-    thetaLoc = gl.getUniformLocation(program, "theta");
     render();
 };
 
 function render() {
    gl.clear(gl.COLOR_BUFFER_BIT);
-   theta += 0.2;
-   gl.uniform1f(thetaLoc, theta);
    gl.drawArrays( gl.TRIANGLES, 0, 3);
    requestAnimFrame(render);
 }
